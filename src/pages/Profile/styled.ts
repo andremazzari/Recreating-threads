@@ -68,3 +68,10 @@ export const UserHeaderPhoto = styled.img`
     width: 84px;
     border-radius: 50%;
 `;
+
+export const UserBio = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 14px;
+`;

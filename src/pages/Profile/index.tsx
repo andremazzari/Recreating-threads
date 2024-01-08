@@ -1,16 +1,20 @@
 import {Container,
         ImgLogoThreads,
         UserHeader, UserHeaderInfo, UserHeaderPhotoContainer, UserHeaderInfoName, UserHeaderInfoUsernameContainer, UserHeaderInfoUsername, UserHeaderThreadsButton, UserHeaderPhoto,
-        UserBio } from "./styled";
+        UserBio,
+        UserFollowersIconsContainer, UserIconsContainer, UserFollowers, UserIcon } from "./styled";
+
 import LogoThreads from '../../assets/images/threads-app-icon.svg';
-import Photo from '../../assets/images/user_photos/andre_mazzari.jpg'
+import LogoInstagram from '../../assets/images/instagram-icon.svg';
+import EllipsisIcon from '../../assets/images/ellipsis-icon.svg';
 
 export function Profile() {
     let userData = {
         name: 'Andre Mazzari',
         username: 'andre_mazzari',
         bio: '💼Engenheiro de dados.\n🎓Mestre em Física.',
-        photo_url: process.env.PUBLIC_URL + '/assets/images/user_photos/andre_mazzari.jpg'
+        photo_url: process.env.PUBLIC_URL + '/assets/images/user_photos/andre_mazzari.jpg',
+        n_followers: 37
     }
 
     const bio_length = userData['bio'].split('\n').length;
@@ -47,6 +51,19 @@ export function Profile() {
                     ))}
                 </p>
             </UserBio>
+            <UserFollowersIconsContainer>
+                <UserFollowers>
+                    {userData['n_followers'] + ' seguidores'}
+                </UserFollowers>
+
+                <UserIconsContainer>
+                    <a href={`https://www.instagram.com/${userData['username']}`}>
+                        <UserIcon src={LogoInstagram} alt='Instagram profile' size='23px'/>
+                    </a>
+
+                    <UserIcon src={EllipsisIcon} alt='More options' size='24px'/>
+                </UserIconsContainer>
+            </UserFollowersIconsContainer>
         </Container>
     );
 }

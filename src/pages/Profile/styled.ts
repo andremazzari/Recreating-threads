@@ -84,6 +84,7 @@ export const UserFollowersIconsContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 15px;
 `;
 
 export const UserFollowers = styled.span`
@@ -116,5 +117,38 @@ interface UserIconProps {
 export const UserIcon = styled.img<UserIconProps>`
     width: ${(props) => props.size};
     height: ${(props) => props.size};
+    cursor: pointer;
+`;
+
+export const ThreadsRespostasContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+`;
+
+export const ThreadsRespostasMenu = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+`;
+
+interface ThreadsRespostasMenuItemProps {
+    selected: boolean
+}
+export const ThreadsRespostasMenuItem = styled.div<ThreadsRespostasMenuItemProps>`
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    font-size: 15px;
+    font-weight: ${(props) => props.selected ? '500' : '400'};
+    border-bottom: ${(props) => props.selected ? '1px solid white' : '1px solid rgba(243, 245, 247, 0.15)'};
+    color: ${(props) => props.selected ? 'currentColor' : 'rgb(119, 119, 119)'};
     cursor: pointer;
 `;

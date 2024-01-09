@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 import {Container,
         ImgLogoThreads,
         UserHeader, UserHeaderInfo, UserHeaderPhotoContainer, UserHeaderInfoName, UserHeaderInfoUsernameContainer, UserHeaderInfoUsername, UserHeaderThreadsButton, UserHeaderPhoto,
         UserBio,
-        UserFollowersIconsContainer, UserIconsContainer, UserFollowers, UserIcon } from "./styled";
+        UserFollowersIconsContainer, UserIconsContainer, UserFollowers, UserIcon,
+        ThreadsRespostasContainer, ThreadsRespostasMenu, ThreadsRespostasMenuItem } from "./styled";
 
 import LogoThreads from '../../assets/images/threads-app-icon.svg';
 import LogoInstagram from '../../assets/images/instagram-icon.svg';
@@ -18,6 +21,9 @@ export function Profile() {
     }
 
     const bio_length = userData['bio'].split('\n').length;
+
+    //states
+    const [selectedMenu, setSelectedMenu] = useState<'threads' | 'respostas'>('threads');
 
     return (
         <Container>
@@ -64,6 +70,17 @@ export function Profile() {
                     <UserIcon src={EllipsisIcon} alt='More options' size='24px'/>
                 </UserIconsContainer>
             </UserFollowersIconsContainer>
+
+            <ThreadsRespostasContainer>
+                <ThreadsRespostasMenu>
+                    <ThreadsRespostasMenuItem selected={selectedMenu == 'threads' ? true : false} onClick={() => {setSelectedMenu('threads')}}>
+                        Threads
+                    </ThreadsRespostasMenuItem>
+                    <ThreadsRespostasMenuItem selected={selectedMenu == 'respostas' ? true : false} onClick={() => {setSelectedMenu('respostas')}}>
+                        Respostas
+                    </ThreadsRespostasMenuItem>
+                </ThreadsRespostasMenu>
+            </ThreadsRespostasContainer>
         </Container>
     );
 }

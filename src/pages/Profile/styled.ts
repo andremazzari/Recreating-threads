@@ -152,3 +152,104 @@ export const ThreadsRespostasMenuItem = styled.div<ThreadsRespostasMenuItemProps
     color: ${(props) => props.selected ? 'currentColor' : 'rgb(119, 119, 119)'};
     cursor: pointer;
 `;
+
+export const ThreadContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    padding-top: 20px;
+`;
+
+export const ThreadPhotoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 12px;
+    padding-top: 4px;
+`;
+
+export const ThreadPhotoImg = styled.img`
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+`;
+
+export const ThreadPostInfo = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const ThreadPostInfoHeader = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    .ThreadsUsername {
+        font-weight: 500;
+        font-size: 16px;
+    }
+`;
+
+export const ThreadPostInfoHeaderDateContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+`;
+
+export const ThreadPostInfoHeaderDate = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: rgb(119, 119, 119);
+    font-weight: 400;
+`;
+
+export const ThreadPostInfoHeaderMoreOptions = styled.img`
+    width: 20px;
+    cursor: pointer;
+`;
+
+export const ThreadPostInfoContent = styled.span`
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 6px;
+`;
+
+export const ThreadPostInfoButtonsContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 8px;
+`;
+
+export const ThreadPostInfoButtonImg = styled.img`
+    width: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 7px;
+
+    &:hover {
+        background-color: rgba(230,230,230,0.1);
+    }
+`;
+
+export const ThreadPostInfoLikes = styled.span`
+    font-size: 15px;
+    color: rgb(119, 119, 119);
+    font-weight: 400;
+    cursor:pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+`;

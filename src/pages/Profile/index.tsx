@@ -5,11 +5,68 @@ import {Container,
         UserHeader, UserHeaderInfo, UserHeaderPhotoContainer, UserHeaderInfoName, UserHeaderInfoUsernameContainer, UserHeaderInfoUsername, UserHeaderThreadsButton, UserHeaderPhoto,
         UserBio,
         UserFollowersIconsContainer, UserIconsContainer, UserFollowers, UserIcon,
-        ThreadsRespostasContainer, ThreadsRespostasMenu, ThreadsRespostasMenuItem } from "./styled";
+        ThreadsRespostasContainer, ThreadsRespostasMenu, ThreadsRespostasMenuItem,
+        ThreadContainer, ThreadPhotoContainer, ThreadPhotoImg,
+        ThreadPostInfo, ThreadPostInfoHeader, ThreadPostInfoHeaderDateContainer, ThreadPostInfoHeaderDate, ThreadPostInfoHeaderMoreOptions,
+        ThreadPostInfoContent, ThreadPostInfoButtonsContainer, ThreadPostInfoButtonImg, ThreadPostInfoLikes} from "./styled";
 
 import LogoThreads from '../../assets/images/threads-app-icon.svg';
 import LogoInstagram from '../../assets/images/instagram-icon.svg';
 import EllipsisIcon from '../../assets/images/ellipsis-icon.svg';
+import EllipsisNoCircleIcon from '../../assets/images/ellipsis-no-circle-icon.svg';
+
+import ThreadLike from '../../assets/images/thread-icon/like.svg';
+import ThreadMessage from '../../assets/images/thread-icon/message.svg';
+import ThreadRetweet from '../../assets/images/thread-icon/retweet.svg';
+import ThreadSend from '../../assets/images/thread-icon/send.svg';
+
+interface ThreadPostProps {
+    username: string;
+    photo_url: string;
+    time: string;
+    content: string;
+    likes: number;
+}
+
+function ThreadPost({username, photo_url, time, content, likes}: ThreadPostProps) {
+    return (
+        <ThreadContainer>
+            <ThreadPhotoContainer>
+                <ThreadPhotoImg src={photo_url}/>
+            </ThreadPhotoContainer>
+            <ThreadPostInfo>
+                <ThreadPostInfoHeader>
+                    <span className="ThreadsUsername">
+                        {username}
+                    </span>
+
+                    <ThreadPostInfoHeaderDateContainer>
+                        <ThreadPostInfoHeaderDate>
+                            {time}
+                        </ThreadPostInfoHeaderDate>
+
+                        <ThreadPostInfoHeaderMoreOptions src={EllipsisNoCircleIcon} alt='More options'/>
+                    </ThreadPostInfoHeaderDateContainer>
+                </ThreadPostInfoHeader>
+                
+                <ThreadPostInfoContent>
+                    {content}
+                </ThreadPostInfoContent>
+
+                <ThreadPostInfoButtonsContainer>
+                        <ThreadPostInfoButtonImg src={ThreadLike}/>
+                        <ThreadPostInfoButtonImg src={ThreadMessage}/>
+                        <ThreadPostInfoButtonImg src={ThreadRetweet}/>
+                        <ThreadPostInfoButtonImg src={ThreadSend}/>
+                </ThreadPostInfoButtonsContainer>
+
+                <ThreadPostInfoLikes>
+                    {likes} curtidas
+                </ThreadPostInfoLikes>
+            </ThreadPostInfo>
+        </ThreadContainer>
+    )
+}
 
 export function Profile() {
     let userData = {
@@ -80,6 +137,7 @@ export function Profile() {
                         Respostas
                     </ThreadsRespostasMenuItem>
                 </ThreadsRespostasMenu>
+                <ThreadPost username={userData['username']} photo_url={userData['photo_url']} time='8h' content='Já tinha até esquecido que eu tinha esse app aqui.' likes={9}/> 
             </ThreadsRespostasContainer>
         </Container>
     );

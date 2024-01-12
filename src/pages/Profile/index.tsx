@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import {Container,
         ImgLogoThreads,
@@ -19,6 +20,44 @@ import ThreadLike from '../../assets/images/thread-icon/like.svg';
 import ThreadMessage from '../../assets/images/thread-icon/message.svg';
 import ThreadRetweet from '../../assets/images/thread-icon/retweet.svg';
 import ThreadSend from '../../assets/images/thread-icon/send.svg';
+
+type userDataType = {
+    name: string,
+    username: string,
+    bio: string,
+    photo_url: string,
+    n_followers: number
+}
+
+const defaultUserData:userDataType = {
+                                        name: 'Default user',
+                                        username: 'default',
+                                        bio: 'A standard bio for a default user.',
+                                        photo_url: process.env.PUBLIC_URL + '/assets/images/user_photos/default.png',
+                                        n_followers: 100
+                                    }
+
+function getUserData(username: string | undefined):userDataType {
+    let userData:userDataType;
+
+    //upgrade: fetch data from database
+    if (username == 'andre_mazzari') {
+        userData = {
+                    name: 'Andre Mazzari',
+                    username: username,
+                    bio: '💼Engenheiro de dados.\n🎓Mestre em Física.',
+                    photo_url: process.env.PUBLIC_URL + '/assets/images/user_photos/andre_mazzari.jpg',
+                    n_followers: 37
+                    }
+    } else {
+        userData = defaultUserData;
+        if (username !== undefined) {
+            userData['username'] = username;
+        }
+    }
+
+    return userData;
+}
 
 interface ThreadPostProps {
     username: string;
@@ -69,13 +108,12 @@ function ThreadPost({username, photo_url, time, content, likes}: ThreadPostProps
 }
 
 export function Profile() {
-    let userData = {
-        name: 'Andre Mazzari',
-        username: 'andre_mazzari',
-        bio: '💼Engenheiro de dados.\n🎓Mestre em Física.',
-        photo_url: process.env.PUBLIC_URL + '/assets/images/user_photos/andre_mazzari.jpg',
-        n_followers: 37
-    }
+    const [userData, setUserData] = useState<userDataType>(defaultUserData);
+    const username = useParams().username;
+
+    useEffect(() => {
+        setUserData(getUserData(username));
+    },[])
 
     const bio_length = userData['bio'].split('\n').length;
 
@@ -137,7 +175,7 @@ export function Profile() {
                         Respostas
                     </ThreadsRespostasMenuItem>
                 </ThreadsRespostasMenu>
-                <ThreadPost username={userData['username']} photo_url={userData['photo_url']} time='8h' content='Já tinha até esquecido que eu tinha esse app aqui.' likes={9}/> 
+                <ThreadPost username={userData['username']} photo_url={userData['photo_url']} time='8h' content='Este é meu primeiro Thread' likes={9}/> 
             </ThreadsRespostasContainer>
         </Container>
     );

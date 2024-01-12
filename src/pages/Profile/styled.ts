@@ -239,7 +239,7 @@ export const ThreadPostInfoButtonImg = styled.img`
     padding: 7px;
 
     &:hover {
-        background-color: rgba(230,230,230,0.1);
+        background-color: rgba(230,230,230,0.2);
     }
 `;
 

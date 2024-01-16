@@ -9,7 +9,7 @@ import {Container,
         ThreadsRespostasContainer, ThreadsRespostasMenu, ThreadsRespostasMenuItem,
         ThreadContainer, ThreadPhotoContainer, ThreadPhotoImg,
         ThreadPostInfo, ThreadPostInfoHeader, ThreadPostInfoHeaderDateContainer, ThreadPostInfoHeaderDate, ThreadPostInfoHeaderMoreOptions,
-        ThreadPostInfoContent, ThreadPostInfoButtonsContainer, ThreadPostInfoButtonImg, ThreadPostInfoLikes} from "./styled";
+        ThreadPostInfoContent, ThreadPostInfoButtonsContainer, ThreadPostInfoButtonImg, ThreadPostInfoLikes, ThreadPostEmpty} from "./styled";
 
 import LogoThreads from '../../assets/images/threads-app-icon.svg';
 import LogoInstagram from '../../assets/images/instagram-icon.svg';
@@ -39,7 +39,7 @@ const defaultUserData:userDataType = {
 
 function getUserData(username: string | undefined):userDataType {
     let userData:userDataType;
-
+    
     //upgrade: fetch data from database
     if (username == 'andre_mazzari') {
         userData = {
@@ -59,15 +59,47 @@ function getUserData(username: string | undefined):userDataType {
     return userData;
 }
 
-interface ThreadPostProps {
-    username: string;
-    photo_url: string;
+interface ThreadPostContentProps {
     time: string;
     content: string;
     likes: number;
 }
 
-function ThreadPost({username, photo_url, time, content, likes}: ThreadPostProps) {
+function getUserThreads(username: string):ThreadPostContentProps[] {
+    //future update: get data from database
+    let userThreads:ThreadPostContentProps[];
+
+    if (username == 'default') {
+        userThreads = [];
+    } else {
+        userThreads = [
+            {
+                time: '5h',
+                content: 'Este é o segundo thread',
+                likes: 157
+            },
+            {
+                time: '8h',
+                content: 'Este é meu primeiro Thread',
+                likes: 9
+            }
+        ]
+    }
+
+    return userThreads;
+}
+
+interface ThreadPostProps {
+    username: string,
+    photo_url: string,
+    threadContent: {
+        time: string;
+        content: string;
+        likes: number;
+    }
+}
+
+function ThreadPost({username, photo_url, threadContent}: ThreadPostProps) {
     return (
         <ThreadContainer>
             <ThreadPhotoContainer>
@@ -81,7 +113,7 @@ function ThreadPost({username, photo_url, time, content, likes}: ThreadPostProps
 
                     <ThreadPostInfoHeaderDateContainer>
                         <ThreadPostInfoHeaderDate>
-                            {time}
+                            {threadContent.time}
                         </ThreadPostInfoHeaderDate>
 
                         <ThreadPostInfoHeaderMoreOptions src={EllipsisNoCircleIcon} alt='More options'/>
@@ -89,7 +121,7 @@ function ThreadPost({username, photo_url, time, content, likes}: ThreadPostProps
                 </ThreadPostInfoHeader>
                 
                 <ThreadPostInfoContent>
-                    {content}
+                    {threadContent.content}
                 </ThreadPostInfoContent>
 
                 <ThreadPostInfoButtonsContainer>
@@ -100,26 +132,49 @@ function ThreadPost({username, photo_url, time, content, likes}: ThreadPostProps
                 </ThreadPostInfoButtonsContainer>
 
                 <ThreadPostInfoLikes>
-                    {likes} curtidas
+                    {threadContent.likes} curtidas
                 </ThreadPostInfoLikes>
             </ThreadPostInfo>
         </ThreadContainer>
     )
 }
 
-export function Profile() {
-    const [userData, setUserData] = useState<userDataType>(defaultUserData);
-    const username = useParams().username;
+
+interface ThreadsContentProps {
+    username: string;
+    photo_url: string;
+}
+function ThreadsContent({username, photo_url}:ThreadsContentProps) {
+    const [userThreads, setUserThreads] = useState<ThreadPostContentProps[]>([])
 
     useEffect(() => {
+        //future update: get data from database async
+        setUserThreads(getUserThreads(username))
+    }, [])
+
+    return (
+        <>
+        {userThreads.length > 0 ? userThreads.map((threadContent) => <ThreadPost username={username} photo_url={photo_url} threadContent={threadContent}/>) : <ThreadPostEmpty>Ainda sem sequências</ThreadPostEmpty>}
+        </>
+    )
+}
+
+export function Profile() {
+    //states
+    const [selectedMenu, setSelectedMenu] = useState<'threads' | 'respostas'>('threads');
+    const [userData, setUserData] = useState<userDataType>(defaultUserData);
+    //const [username, setUsername] = useState<string | undefined>(undefined);
+
+    let username = useParams().username;
+
+    useEffect(() => {
+        //future update: get data from database async
         setUserData(getUserData(username));
+
     },[])
 
     const bio_length = userData['bio'].split('\n').length;
-
-    //states
-    const [selectedMenu, setSelectedMenu] = useState<'threads' | 'respostas'>('threads');
-
+    
     return (
         <Container>
             <ImgLogoThreads src={LogoThreads} alt="Threads logo"/>
@@ -175,7 +230,7 @@ export function Profile() {
                         Respostas
                     </ThreadsRespostasMenuItem>
                 </ThreadsRespostasMenu>
-                <ThreadPost username={userData['username']} photo_url={userData['photo_url']} time='8h' content='Este é meu primeiro Thread' likes={9}/> 
+                <ThreadsContent username={userData['username']} photo_url={userData['photo_url']}/>
             </ThreadsRespostasContainer>
         </Container>
     );

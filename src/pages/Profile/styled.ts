@@ -253,3 +253,16 @@ export const ThreadPostInfoLikes = styled.span`
         text-decoration: underline;
     }
 `;
+
+export const ThreadPostEmpty = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 80px;
+    padding-bottom: 80px;
+    font-weight: 400;
+    color: rgb(119, 119, 119);
+    font-size: 16px;
+`;

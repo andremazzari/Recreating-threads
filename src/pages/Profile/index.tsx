@@ -9,7 +9,8 @@ import {Container,
         ThreadsRespostasContainer, ThreadsRespostasMenu, ThreadsRespostasMenuItem,
         ThreadContainer, ThreadPhotoContainer, ThreadPhotoImg,
         ThreadPostInfo, ThreadPostInfoHeader, ThreadPostInfoHeaderDateContainer, ThreadPostInfoHeaderDate, ThreadPostInfoHeaderMoreOptions,
-        ThreadPostInfoContent, ThreadPostInfoButtonsContainer, ThreadPostInfoButtonImg, ThreadPostInfoLikes, ThreadPostEmpty} from "./styled";
+        ThreadPostInfoContent, ThreadPostInfoButtonsContainer, ThreadPostInfoButtonImg, ThreadPostInfoLikes,
+        ThreadPostEmpty, ThreadPostSeparator} from "./styled";
 
 import LogoThreads from '../../assets/images/threads-app-icon.svg';
 import LogoInstagram from '../../assets/images/instagram-icon.svg';
@@ -96,11 +97,13 @@ interface ThreadPostProps {
         time: string;
         content: string;
         likes: number;
-    }
+    },
+    separator: boolean
 }
 
-function ThreadPost({username, photo_url, threadContent}: ThreadPostProps) {
+function ThreadPost({username, photo_url, threadContent, separator}: ThreadPostProps) {
     return (
+        <>
         <ThreadContainer>
             <ThreadPhotoContainer>
                 <ThreadPhotoImg src={photo_url}/>
@@ -136,6 +139,8 @@ function ThreadPost({username, photo_url, threadContent}: ThreadPostProps) {
                 </ThreadPostInfoLikes>
             </ThreadPostInfo>
         </ThreadContainer>
+        {separator ? <ThreadPostSeparator/> : ''}
+        </>
     )
 }
 
@@ -152,10 +157,11 @@ function ThreadsContent({username, photo_url}:ThreadsContentProps) {
         setUserThreads(getUserThreads(username))
     }, [])
 
+    let num_threads = userThreads.length;
     return (
         <>
         {
-            userThreads.length > 0 ? userThreads.map((threadContent, index) => <ThreadPost key={index} username={username} photo_url={photo_url} threadContent={threadContent}/>) : <ThreadPostEmpty>Ainda sem sequências.</ThreadPostEmpty>
+            num_threads > 0 ? userThreads.map((threadContent, index) => <ThreadPost key={index} username={username} photo_url={photo_url} threadContent={threadContent} separator={index == num_threads - 1 ? false : true}/>) : <ThreadPostEmpty>Ainda sem sequências.</ThreadPostEmpty>
         }
         </>
     )

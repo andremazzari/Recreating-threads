@@ -165,6 +165,7 @@ export const ThreadContainer = styled.div`
     align-items: flex-start;
     width: 100%;
     padding-top: 20px;
+    margin-bottom: 15px;
 `;
 
 export const ThreadPhotoContainer = styled.div`
@@ -271,4 +272,10 @@ export const ThreadPostEmpty = styled.div`
     font-weight: 400;
     color: rgb(119, 119, 119);
     font-size: 16px;
+`;
+
+export const ThreadPostSeparator = styled.div`
+    width: 100%;
+    height: 1px;
+    background-color: rgb(110, 110, 110);
 `;

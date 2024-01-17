@@ -155,9 +155,17 @@ function ThreadsContent({username, photo_url}:ThreadsContentProps) {
     return (
         <>
         {
-            userThreads.length > 0 ? userThreads.map((threadContent, index) => <ThreadPost key={index} username={username} photo_url={photo_url} threadContent={threadContent}/>) : <ThreadPostEmpty>Ainda sem sequências</ThreadPostEmpty>
+            userThreads.length > 0 ? userThreads.map((threadContent, index) => <ThreadPost key={index} username={username} photo_url={photo_url} threadContent={threadContent}/>) : <ThreadPostEmpty>Ainda sem sequências.</ThreadPostEmpty>
         }
         </>
+    )
+}
+
+function RespostasContent() {
+    //future update: implement answers and get data from database
+    //For now, only print "Ainda sem respostas"
+    return (
+        <ThreadPostEmpty>Ainda sem respostas.</ThreadPostEmpty>
     )
 }
 
@@ -224,7 +232,9 @@ export function Profile() {
                         Respostas
                     </ThreadsRespostasMenuItem>
                 </ThreadsRespostasMenu>
-                <ThreadsContent username={userData['username']} photo_url={userData['photo_url']}/>
+                {
+                    selectedMenu == 'threads' ? <ThreadsContent username={userData['username']} photo_url={userData['photo_url']}/> : <RespostasContent/>
+                }
             </ThreadsRespostasContainer>
         </Container>
     );

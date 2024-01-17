@@ -19,6 +19,7 @@ export const UserHeader = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-bottom: 10px;
 `;
 
 export const UserHeaderInfo = styled.div`
@@ -70,12 +71,17 @@ export const UserHeaderPhoto = styled.img`
     cursor: pointer;
 `;
 
-export const UserBio = styled.div`
+export const UserBio = styled.ul`
+    list-style-type: none;
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
     font-size: 14px;
-    margin-bottom: 10px;
+    padding: 0;
+    margin-bottom: 20px;
 `;
 
 export const UserFollowersIconsContainer = styled.div`

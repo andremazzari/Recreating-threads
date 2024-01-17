@@ -154,7 +154,9 @@ function ThreadsContent({username, photo_url}:ThreadsContentProps) {
 
     return (
         <>
-        {userThreads.length > 0 ? userThreads.map((threadContent) => <ThreadPost username={username} photo_url={photo_url} threadContent={threadContent}/>) : <ThreadPostEmpty>Ainda sem sequências</ThreadPostEmpty>}
+        {
+            userThreads.length > 0 ? userThreads.map((threadContent, index) => <ThreadPost key={index} username={username} photo_url={photo_url} threadContent={threadContent}/>) : <ThreadPostEmpty>Ainda sem sequências</ThreadPostEmpty>
+        }
         </>
     )
 }
@@ -163,18 +165,18 @@ export function Profile() {
     //states
     const [selectedMenu, setSelectedMenu] = useState<'threads' | 'respostas'>('threads');
     const [userData, setUserData] = useState<userDataType>(defaultUserData);
-    //const [username, setUsername] = useState<string | undefined>(undefined);
+    //const [usernamestate, setUsername] = useState<string | undefined>(undefined);
 
     let username = useParams().username;
+
 
     useEffect(() => {
         //future update: get data from database async
         setUserData(getUserData(username));
-
     },[])
 
     const bio_length = userData['bio'].split('\n').length;
-    
+
     return (
         <Container>
             <ImgLogoThreads src={LogoThreads} alt="Threads logo"/>
@@ -198,14 +200,7 @@ export function Profile() {
                 </UserHeaderPhotoContainer>
             </UserHeader>
             <UserBio>
-                <p>
-                    {userData['bio'].split('\n').map((line, index) => (
-                        <>
-                            {line}
-                            {index < bio_length - 1 && <br/>}
-                        </>
-                    ))}
-                </p>
+                    {userData['bio'].split('\n').map((line, index) => <li key={index}>{line}</li>)}
             </UserBio>
             <UserFollowersIconsContainer>
                 <UserFollowers>

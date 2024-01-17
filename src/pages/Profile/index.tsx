@@ -155,7 +155,7 @@ function ThreadsContent({username, photo_url}:ThreadsContentProps) {
     useEffect(() => {
         //future update: get data from database async
         setUserThreads(getUserThreads(username))
-    }, [])
+    }, [username])
 
     let num_threads = userThreads.length;
     return (

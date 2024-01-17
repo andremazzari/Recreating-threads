@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.js": "/Recreating-threads/static/js/main.d9dc2a35.js",
+    "static/media/instagram-icon.svg": "/Recreating-threads/static/media/instagram-icon.0590ec91b28a8ca9b2283992dcadc7ae.svg",
+    "static/media/threads-app-icon.svg": "/Recreating-threads/static/media/threads-app-icon.d0234eab9a45a68de3408ae20b8f2056.svg",
+    "static/media/ellipsis-icon.svg": "/Recreating-threads/static/media/ellipsis-icon.e6eecd9d5563e297bb9d5040487580be.svg",
+    "static/media/send.svg": "/Recreating-threads/static/media/send.c07b1a963674efd9c6a2dbdd7581a457.svg",
+    "static/media/retweet.svg": "/Recreating-threads/static/media/retweet.6f2b6b39aebf3b0f9c927b8772755e38.svg",
+    "index.html": "/Recreating-threads/index.html",
+    "static/media/like.svg": "/Recreating-threads/static/media/like.e2a6194da694acc20caed1142f0947da.svg",
+    "static/media/message.svg": "/Recreating-threads/static/media/message.01bbf9e0d3c7b0d9b2a92cec0f6d8910.svg",
+    "static/media/ellipsis-no-circle-icon.svg": "/Recreating-threads/static/media/ellipsis-no-circle-icon.0c715901ea6879896c98d4087db0bf76.svg",
+    "main.d9dc2a35.js.map": "/Recreating-threads/static/js/main.d9dc2a35.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d9dc2a35.js"
+  ]
+}

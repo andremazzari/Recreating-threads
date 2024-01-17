@@ -162,20 +162,19 @@ function ThreadsContent({username, photo_url}:ThreadsContentProps) {
 }
 
 export function Profile() {
+    //Route params
+    let username = useParams().username;
+    
     //states
     const [selectedMenu, setSelectedMenu] = useState<'threads' | 'respostas'>('threads');
-    const [userData, setUserData] = useState<userDataType>(defaultUserData);
-    //const [usernamestate, setUsername] = useState<string | undefined>(undefined);
-
-    let username = useParams().username;
+    const [userData, setUserData] = useState<userDataType>(getUserData(username));
 
 
     useEffect(() => {
         //future update: get data from database async
         setUserData(getUserData(username));
-    },[])
 
-    const bio_length = userData['bio'].split('\n').length;
+    },[username])
 
     return (
         <Container>

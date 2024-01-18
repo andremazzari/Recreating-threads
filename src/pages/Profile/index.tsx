@@ -70,9 +70,7 @@ function getUserThreads(username: string):ThreadPostContentProps[] {
     //future update: get data from database
     let userThreads:ThreadPostContentProps[];
 
-    if (username == 'default') {
-        userThreads = [];
-    } else {
+    if (username == 'andre_mazzari' || username == 'default') {
         userThreads = [
             {
                 time: '5h',
@@ -85,6 +83,8 @@ function getUserThreads(username: string):ThreadPostContentProps[] {
                 likes: 9
             }
         ]
+    } else {
+        userThreads = [];
     }
 
     return userThreads;
